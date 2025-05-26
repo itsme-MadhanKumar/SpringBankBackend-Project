@@ -13,6 +13,12 @@ public class BankSystemApplication
 
 	public static void main(String[] args)
 	{
+		System.out.println("Java Version       : " + System.getProperty("java.version"));
+		System.out.println("Java Runtime Ver.  : " + System.getProperty("java.runtime.version"));
+		System.out.println("Java Vendor        : " + System.getProperty("java.vendor"));
+		System.out.println("Java VM Name       : " + System.getProperty("java.vm.name"));
+		System.out.println("Java VM Version    : " + System.getProperty("java.vm.version"));
+		System.out.println("Java Home (JDK)    : " + System.getProperty("java.home"));
 		SpringApplication.run(BankSystemApplication.class, args);
 	}
 }
