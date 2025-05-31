@@ -507,8 +507,7 @@ public class AdminController
         return ResponseEntity.ok(response);
     }
 
-
-        @GetMapping("/")
+    @GetMapping("/")
         public String healthCheck()
         {
             return "OK";

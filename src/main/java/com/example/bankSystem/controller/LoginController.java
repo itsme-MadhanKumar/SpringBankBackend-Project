@@ -17,6 +17,7 @@ public class LoginController
 {
     @Autowired
     private LoginService service;
+
     @Autowired
     private OtpGen otpGen;
     @Autowired
@@ -33,13 +34,12 @@ public class LoginController
         {
             return ResponseEntity.badRequest().body("{\"message\": \"Registering not allowed on mobile devices.\"}");
         }
-        System.out.println(user.getFullname());
-        System.out.println(user.getEmail());
+
         String flag = service.verifyCrediential(user);
         boolean isAlreadyExist = service.alreadyExistservice(user.getAadhar());
         if (!isAlreadyExist)
         {
-            if (flag.equals("success"))
+            if (flag.equals("Done"))
             {
                 otpGen.generateOtp(user.getEmail());
                 String generated_otp = otpGen.getStoredOtp(user.getEmail());
@@ -48,7 +48,7 @@ public class LoginController
                     tempStorage.put(user.getEmail(), new User(user.getFullname(), user.getMobile(), user.getAadhar(), user.getPan(), user.getAddress(), user.getEmail(), user.getPassword()));
                     return ResponseEntity.ok("{\"message\": \"Successful Verified\"}");
             }
-            return ResponseEntity.badRequest().body("{\"message\": \"Invalid Mail Address\"}");
+            return ResponseEntity.badRequest().body("{\"message\": \""+flag+"\"}");
         }
         return ResponseEntity.badRequest().body("{\"message\": \"User Already Exist #Aadhar\"}");
     }
