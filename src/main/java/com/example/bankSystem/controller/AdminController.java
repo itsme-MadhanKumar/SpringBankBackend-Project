@@ -28,10 +28,8 @@ public class AdminController
     private OtpGen otpGen;
     @Autowired
     private MailSender mailSender;
-
     @Autowired
     private LoginService loginService;
-
 
 
     @PostMapping("/api/user/update-password")
@@ -325,6 +323,7 @@ public class AdminController
         }
     }
 
+
     @PostMapping("api/verify-otp-pop-takeAction")
     public ResponseEntity<Map<String, Object>> verifyOtpTakeAction(@RequestBody OtpVerificationRequestTakeaction request) {
 
@@ -362,6 +361,8 @@ public class AdminController
         }
         return ResponseEntity.notFound().build();
     }
+
+
 
     @PostMapping("/api/user/generate-payment-password")
     public ResponseEntity<?> GeneratePaymentPassword(@RequestBody GeneratePaymentPasswordRequest request)
@@ -461,7 +462,8 @@ public class AdminController
                 service.deleteActionofLoanHistory(userId);
                 response.put("success", "true");
             }
-            case 3 -> {
+            case 3 ->
+            {
                 boolean flag = service.deletingTransactionService(userId);
                 if (!flag) {
                     response.put("message", "Error Try Again Later");
@@ -470,7 +472,8 @@ public class AdminController
                 }
                 response.put("success", "true");
             }
-            case 4 -> {
+            case 4 ->
+            {
                 boolean flag1 = service.deletingNotificationService(userId);
                 if (!flag1) {
                     response.put("message", "Error Try Again Later");
@@ -479,7 +482,8 @@ public class AdminController
                 }
                 response.put("success", "true");
             }
-            case 5 -> {
+            case 5 ->
+            {
                 boolean flag2 = service.deletingAccountService(userId);
                 System.out.println("EMAILLLLL - " + email + " uSER IS " + userId);
                 if (email == null || !email.contains("@")) {
@@ -494,13 +498,28 @@ public class AdminController
                 }
                 response.put("success", "true");
             }
-            default -> {
+            default ->
+            {
                 response.put("message", "Error Try Again Later");
                 response.put("success", "false");
             }
         }
         return ResponseEntity.ok(response);
     }
+
+
+        @GetMapping("/")
+        public String healthCheck()
+        {
+            return "OK";
+        }
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
+
+
 }
 
 
