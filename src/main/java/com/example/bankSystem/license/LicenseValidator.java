@@ -13,9 +13,7 @@ public class LicenseValidator implements CommandLineRunner {
     @Value("${app.license.key}")
     private String licenseKey;
 
-    // Store only the hash of the expected key
     private static final String EXPECTED_HASH = "cb9bc9db969c30cfff4e59db844dfef124cc7795fa3a766e21bcc6c41886263e";
-    // (This is SHA-256 of "password" just for demo)
 
     @Override
     public void run(String... args) throws Exception {
@@ -23,7 +21,6 @@ public class LicenseValidator implements CommandLineRunner {
 
         if (!EXPECTED_HASH.equals(hashedInput)) {
             System.err.println("❌ Invalid license. Contact developer to activate.");
-//            throw new IllegalStateException("Invalid license key. Application stopped.");
         }
         System.out.println("✅ License validated successfully.");
     }
